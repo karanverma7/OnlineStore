@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>Online Store</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/normalize.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templatemo-misc.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}">
+</head>
+<body>
+{% include 'navbar.html' %}
+    <div class="content-section">
+      <div class="container">
+        <h1>Sign Out</h1>
+
+        <p>Are you sure you want to sign out?</p>
+
+        <form method="post" action="{% url 'account_logout' %}">
+          {% csrf_token %}
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+          {% endif %}
+          <button class="btn btn-danger" type="submit">Sign Out</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

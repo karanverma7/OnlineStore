@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% load static %}
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>Online Store</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/normalize.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templatemo-misc.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+      .bg-4 {
+        background-color: #2f2f2f;
+        color: #fff;
+      }
+      .container-fluid {
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
+    </style>
+
+</head>
+<body>
+    {% include 'navbar.html' %}
+    
+    <div class="content-section">
+        <div class="container">
+            <div class="row">
+              <div class="col-md-12 section-title">
+                  <h2>Trending Products</h2>
+              </div>
+              {% for item in products2 %}
+                <div class="col-md-3">
+                    <div class="product-item-1">
+                        <div class="product-thumb">
+                            <img src="{{ item.image.url }}" alt="Product Title">
+                        </div> <!-- /.product-thumb -->
+                        <div class="product-content">
+                            <h5><a href="#">{{ item.name }}</a></h5>
+                            <span class="tagline">Partner Name</span>
+                            <span class="price">${{ item.price }}</span>
+                            <p>{{ item.detail }}</p>
+                            <form action="." method="POST">
+                              {% csrf_token %}
+                              <button type="submit" class="btn btn-success">Add to Cart</button>
+                              <input type="hidden" name="objectId" value={{ item.id }}>
+                            </form>
+                        </div> <!-- /.product-content -->
+                    </div> <!-- /.product-item -->
+                </div>
+              {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="content-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 section-title">
+                    <h2>New Products</h2>
+                </div> <!-- /.section -->
+            </div> <!-- /.row -->
+            <div class="row">
+                {% for item in products %}
+                  <div class="col-md-3 col-sm-6">
+                      <div class="product-item">
+                          <div class="product-thumb">
+                              <img src="{{ item.image.url }}" alt="">
+                          </div> <!-- /.product-thum -->
+                          <div class="product-content">
+                              <h5><a href="#">{{ item.name }}</a></h5>
+                              <span class="price">${{ item.price }}</span>
+                          </div> <!-- /.product-content -->
+                          <br>
+                          <form action="." method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success">Add to Cart</button>
+                            <input type="hidden" name="objectId" value={{ item.id }}>
+                          </form>
+                      </div> <!-- /.product-item -->
+                  </div> <!-- /.col-md-3 -->
+                {% endfor %}
+            </div> <!-- /.row -->
+        </div> <!-- /.container -->
+    </div> <!-- /.content-section -->
+    <footer class="container-fluid bg-4 text-center">
+      <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="{% url 'index' %}"> Onlinestore.com</a>
+      </div>
+    </footer>
+
+  </body>
+</html>

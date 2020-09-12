@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+{% load static %}
+<html class="no-js">
+<head>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://use.fontawesome.com/c560c025cf.js"></script>
+
+    <style>
+      .quantity {
+        float: left;
+        margin-right: 15px;
+        background-color: #eee;
+        position: relative;
+        width: 80px;
+        overflow: hidden
+      }
+
+      .quantity input {
+        margin: 0;
+        text-align: center;
+        width: 15px;
+        height: 15px;
+        padding: 0;
+        float: right;
+        color: #000;
+        font-size: 20px;
+        border: 0;
+        outline: 0;
+        background-color: #F6F6F6
+      }
+
+      .quantity input.qty {
+        position: relative;
+        border: 0;
+        width: 100%;
+        height: 40px;
+        padding: 10px 25px 10px 10px;
+        text-align: center;
+        font-weight: 400;
+        font-size: 15px;
+        border-radius: 0;
+        background-clip: padding-box
+      }
+
+      .quantity .minus, .quantity .plus {
+        line-height: 0;
+        background-clip: padding-box;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+        -webkit-background-size: 6px 30px;
+        -moz-background-size: 6px 30px;
+        color: #bbb;
+        font-size: 20px;
+        position: absolute;
+        height: 50%;
+        border: 0;
+        right: 0;
+        padding: 0;
+        width: 25px;
+        z-index: 3
+      }
+
+      .quantity .minus:hover, .quantity .plus:hover {
+        background-color: #dad8da
+      }
+
+      .quantity .minus {
+        bottom: 0
+      }
+      .shopping-cart {
+        margin-top: 20px;
+      }
+      .bg-4 {
+        background-color: #2f2f2f;
+        color: #fff;
+      }
+      .container_1-fluid {
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
+      .col-50 {
+        -ms-flex: 50%; /* IE10 */
+        flex: 50%;
+        float: left;
+        width: 25%;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      .col-75 {
+        -ms-flex: 75%; /* IE10 */
+        flex: 75%;
+      }
+
+      .col-25,
+      .col-50,
+      .col-75 {
+        padding: 0 16px;
+      }
+
+      .container_1 {
+        background-color: #f2f2f2;
+        padding: 10px 10px 10px 10px;
+
+        border-radius: 3px;
+      }
+      .col-25 {
+        -ms-flex: 25%; /* IE10 */
+        flex: 25%;
+      }
+      .row {
+        display: -ms-flexbox; /* IE10 */
+        display: flex;
+        -ms-flex-wrap: wrap; /* IE10 */
+        flex-wrap: wrap;
+        margin: 0 -16px;
+      }
+      .label_name {
+        width: 20%;
+        float: left;
+        margin-top: 5px;
+      }
+
+      input[type=text], select, textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+      }
+    </style>
+
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="content-section">
+
+      {% if flag %}
+      <div class="container_1 container" style="text-align: center;">
+        <div class="col-4 offset-4">
+          <span class="label label-success">Successful</span>
+          <h3>Order has been placed.</h3>
+          <h4>Thank you for shopping with us!</h4>
+        </div>
+      </div>
+      {% else %}
+      <div class="container_1 container">
+        <form action="." method="POST">
+          {% csrf_token %}
+          <div class="row">
+            
+            <div class="col-9 offset-2">
+              <br>
+              <h3>Billing Address</h3>                
+                <div class="row">
+                  <label for="fname">Full Name</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                  <input type="text" id="fname" name="name" placeholder="John M. Doe" required>
+                  </div>
+                <div class="row">
+                    <label for="adr">Address</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" id="adr" name="address" placeholder="542 W. 15th Street" required>
+                </div>
+                <div class="row">
+                    <label for="city">City</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" id="city" name="city" placeholder="New York" required>
+                </div>
+                <br>
+              <div class="row">
+                  <label for="Payment">Payment Method</label> &nbsp;&nbsp;&nbsp;
+                  <div class="col-6">
+                    <select name="Payment" required>
+                      <option>Debit Card</option>
+                      <option>Credit Card</option>
+                      <option>Netbanking</option>
+                      <option>Phone Wallet</option>
+                    </select>
+                  </div>
+                </div>
+                <br>
+              <div class="row">
+                  <label for="status">Order Status</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <span class="label label-warning">Pending</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-10 offset-1">
+              <br><br>
+              <hr>
+              <br>
+              <h3>Your Cart ({{ cartSize }})</h3>
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in cartItems %}
+                  <tr>
+                    <td>{{ item.name }}</td>
+                    <td>$ {{ item.price }}</td>
+                  </tr>
+                  {% endfor %}
+                  <tr>
+                    <td><h5>Total Price</h5></td>
+                    <td><h5>$ {{ totalPrice }}</h5></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="row">
+              <br>
+              <input type="submit" value="Continue to checkout" class="btn btn-success" style="margin: auto;">
+          </div>
+          </div>
+        </form>
+      </div>
+      {% endif %}
+      </div>
+    <footer class="container_1-fluid bg-4 text-center">
+      <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="{% url 'index' %}"> Onlinestore.com</a>
+      </div>
+    </footer>
+
+  </body>
+</html>

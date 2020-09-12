@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load static %}
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>Online Store</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/normalize.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templatemo-misc.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}">
+    <style>
+      .bg-4 {
+        background-color: #2f2f2f;
+        color: #fff;
+      }
+      .container-fluid {
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
+
+      form input[type=text] {
+        margin-left: 50px;
+      }
+      form input[type=email] {
+        margin-left: 10px;
+      }
+      form input[type=password] {
+        margin-left: 55px;
+      }
+      form input:nth-child(4) {
+        margin-left: 5px;
+      }
+
+    </style>
+
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="content-section">
+      <div class="container">
+        <h1>Sign Up</h1>
+
+        <p>Already have an account? Then please <a href="{{ login_url }}">sign in</a>.</p>
+
+        <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          <button class="btn btn-primary" type="submit">Sign Up</button>
+        </form>
+      </div>
+    </div>
+    <footer class="container-fluid bg-4 text-center">
+      <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="https://mdbootstrap.com/"> Onlinestore.com</a>
+      </div>
+    </footer>
+  </body>
+</html>

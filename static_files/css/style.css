@@ -1,0 +1,155 @@
+header {
+    position: fixed;
+    top: 32px;
+    width: 100%;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    background-color: white;
+    z-index: 2;
+}
+
+header svg {
+    margin-left: 60px;
+    height: 55px;
+    width: auto;
+
+}
+
+header h1 {
+    margin-right: 640px;
+    font-size: 45px;
+    color: #2A80B9;
+}
+
+.dropbtn {
+    background-color: white;
+    padding: 10px 12px 10px 12px;
+    border: none;
+    display: none;
+    opacity: 0.8;
+  }
+
+h1 {
+    padding-right: 100px;
+}
+.dropbtn img {
+    height: 32px;
+    width: 32px;
+}
+
+.dropdown {
+    position: relative;
+}
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    left: -143px;
+    background-color: #f1f1f1;
+    min-width: 190px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 8px 0px 8px 8px;
+}
+  
+.dropdown-content a {
+    color: black;
+    padding: 15px 40px 15px 25px;
+    text-decoration: none;
+    display: block;
+    border-radius: 8px 0px 8px 8px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.dropdown-content a:hover {
+    background-color: #2A80B9;
+    color: antiquewhite;     
+}
+  
+.dropdown:hover .dropdown-content {
+      display: block; 
+}
+  
+.dropdown:hover .dropbtn { 
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+
+.product-item .product-thumb img {
+    height: 260px; background-position: center; background-size: cover;
+}
+
+.product-item-1 .product-thumb img {
+    height: 200px; background-position: center; background-size: cover;
+}
+
+@media only screen and (max-width: 900px) {
+
+    header {
+        top: -10px;
+    }
+
+    .dropbtn {
+        display: block;
+        margin-right: 20px;
+    }
+
+    .dropbtn img {
+        width: 40px;
+    }
+
+    .top-header {
+        display: none;
+    }
+
+    header svg {
+        margin-left: 20px;
+    }
+    
+    header h1 {
+        margin-right: 240px;
+        font-size: 40px;
+        color: #2A80B9;
+    }
+
+
+.product-item .product-thumb img {
+    height: 320px;
+}
+
+.product-item-1 .product-thumb img {
+    height: 600px;
+}
+
+}
+
+@media only screen and (max-width: 600px) {
+
+    .dropbtn {
+        margin-right: 5px;
+    }
+
+    .dropbtn img {
+        width: 30px;
+        height: auto;
+    }
+
+    header svg {
+        margin: 0px 10px;
+    }
+    
+    header h1 {
+        margin: 0px;
+        font-size: 24px;
+        color: #2A80B9;
+    }
+
+    .product-item-1 .product-thumb img {
+        height: 300px;
+    }
+}
