@@ -33,6 +33,10 @@
 <body>
     {% include 'navbar.html' %}
     
+    {% if cartSize >= 1 %}
+      {% include 'popup-cart.html' %}
+    {% endif %}
+    
     <div class="content-section">
         <div class="container">
             <div class="row">
@@ -50,7 +54,7 @@
                             <span class="tagline">Partner Name</span>
                             <span class="price">${{ item.price }}</span>
                             <p>{{ item.detail }}</p>
-                            <form action="." method="POST">
+                            <form method="POST">
                               {% csrf_token %}
                               <button type="submit" class="btn btn-success">Add to Cart</button>
                               <input type="hidden" name="objectId" value={{ item.id }}>
